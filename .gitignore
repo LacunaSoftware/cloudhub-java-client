@@ -19,3 +19,15 @@ hs_err_pid*
 target
 .gradle
 build
+.github/workflows/maven.yml
+git_push.sh
+gradle.properties
+.openapi-generator/*
+pom.xml
+.openapi-generator/*
+api/openapi.yaml
+build.sbt
+.travis.yml
+src/main/AndroidManifest.xml
+README.md
+.openapi-generator-ignore
