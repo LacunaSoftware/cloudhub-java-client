@@ -29,13 +29,13 @@ import com.google.gson.stream.JsonWriter;
 @JsonAdapter(TrustServiceSessionTypes.Adapter.class)
 public enum TrustServiceSessionTypes {
   
-  NUMBER_1(1),
+  SINGLE_SIGNATURE(1),
   
-  NUMBER_2(2),
+  MULTI_SIGNATURE(2),
   
-  NUMBER_3(3),
+  SIGNATURE_SESSION(3),
   
-  NUMBER_4(4);
+  AUTHENTICATION_SESSION(4);
 
   private Integer value;
 
