@@ -18,13 +18,7 @@ import cloudhub.client.CloudhubClient;
 import cloudhub.client.ApiException;
 import cloudhub.client.ApiResponse;
 import cloudhub.client.Pair;
-import cloudhub.client.ProgressRequestBody;
-import cloudhub.client.ProgressResponseBody;
-
 import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-
 
 import cloudhub.client.model.SessionCreateRequest;
 import cloudhub.client.model.SessionModel;
@@ -32,10 +26,10 @@ import cloudhub.client.model.SignHashRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.core.GenericType;
 
 public class SessionsApi {
     private CloudhubClient localVarCloudhubClient;
@@ -451,5 +445,24 @@ public class SessionsApi {
         Type localVarReturnType = new TypeToken<byte[]>(){}.getType();
         localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
+    }
+
+    /**
+     * Converts a given byte array certificate into a readable string for signature or validation purposes
+     * @param certificate The certificate obtained from apiCertificateGet
+     * @return a String with the certificate in base 64
+     */
+    public static String convertCertificateToString(byte[] certificate) {
+        return new String(certificate).replace("\"", "");
+    }
+
+    /**
+     * Converts a given byte array toSignHash into a base64 encoded byte array for signature purposes
+     * @param toSignHash the hash used to sign the document
+     * @return base64 encoded byte array
+     */
+    public static byte[] convertToSignHashToByteArray64(byte[] toSignHash){
+        // first we need to convert it to string and then decode as base64
+        return Base64.getDecoder().decode(convertCertificateToString(toSignHash));
     }
 }
