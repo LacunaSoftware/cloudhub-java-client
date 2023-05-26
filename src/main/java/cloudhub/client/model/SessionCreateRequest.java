@@ -22,6 +22,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -60,6 +61,10 @@ public class SessionCreateRequest {
   public static final String SERIALIZED_NAME_REDIRECT_URI = "redirectUri";
   @SerializedName(SERIALIZED_NAME_REDIRECT_URI)
   private String redirectUri;
+
+  public static final String SERIALIZED_NAME_LIFETIME_IN_MINUTES = "lifetimeInMinutes";
+  @SerializedName(SERIALIZED_NAME_LIFETIME_IN_MINUTES)
+  private Double lifetimeInMinutes;
 
   public SessionCreateRequest() {
   }
@@ -130,6 +135,28 @@ public class SessionCreateRequest {
   }
 
 
+  public SessionCreateRequest lifetimeInMinutes(Double lifetimeInMinutes) {
+    
+    this.lifetimeInMinutes = lifetimeInMinutes;
+    return this;
+  }
+
+   /**
+   * Get lifetimeInMinutes
+   * @return lifetimeInMinutes
+  **/
+  @javax.annotation.Nullable
+
+  public Double getLifetimeInMinutes() {
+    return lifetimeInMinutes;
+  }
+
+
+  public void setLifetimeInMinutes(Double lifetimeInMinutes) {
+    this.lifetimeInMinutes = lifetimeInMinutes;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -142,12 +169,24 @@ public class SessionCreateRequest {
     SessionCreateRequest sessionCreateRequest = (SessionCreateRequest) o;
     return Objects.equals(this.identifier, sessionCreateRequest.identifier) &&
         Objects.equals(this.type, sessionCreateRequest.type) &&
-        Objects.equals(this.redirectUri, sessionCreateRequest.redirectUri);
+        Objects.equals(this.redirectUri, sessionCreateRequest.redirectUri) &&
+        Objects.equals(this.lifetimeInMinutes, sessionCreateRequest.lifetimeInMinutes);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(identifier, type, redirectUri);
+    return Objects.hash(identifier, type, redirectUri, lifetimeInMinutes);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -157,6 +196,7 @@ public class SessionCreateRequest {
     sb.append("    identifier: ").append(toIndentedString(identifier)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    redirectUri: ").append(toIndentedString(redirectUri)).append("\n");
+    sb.append("    lifetimeInMinutes: ").append(toIndentedString(lifetimeInMinutes)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -182,6 +222,7 @@ public class SessionCreateRequest {
     openapiFields.add("identifier");
     openapiFields.add("type");
     openapiFields.add("redirectUri");
+    openapiFields.add("lifetimeInMinutes");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

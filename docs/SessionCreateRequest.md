@@ -10,6 +10,7 @@
 |**identifier** | **String** |  |  |
 |**type** | **TrustServiceSessionTypes** |  |  [optional] |
 |**redirectUri** | **String** |  |  |
+|**lifetimeInMinutes** | **Double** |  |  [optional] |
 
 
 
