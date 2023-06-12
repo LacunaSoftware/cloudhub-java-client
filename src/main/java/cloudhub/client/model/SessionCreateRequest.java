@@ -62,9 +62,9 @@ public class SessionCreateRequest {
   @SerializedName(SERIALIZED_NAME_REDIRECT_URI)
   private String redirectUri;
 
-  public static final String SERIALIZED_NAME_LIFETIME_IN_MINUTES = "lifetimeInMinutes";
-  @SerializedName(SERIALIZED_NAME_LIFETIME_IN_MINUTES)
-  private Double lifetimeInMinutes;
+  public static final String SERIALIZED_NAME_LIFETIME_IN_SECONDS = "lifetimeInSeconds";
+  @SerializedName(SERIALIZED_NAME_LIFETIME_IN_SECONDS)
+  private Integer lifetimeInSeconds;
 
   public SessionCreateRequest() {
   }
@@ -135,25 +135,25 @@ public class SessionCreateRequest {
   }
 
 
-  public SessionCreateRequest lifetimeInMinutes(Double lifetimeInMinutes) {
+  public SessionCreateRequest lifetimeInSeconds(Integer lifetimeInSeconds) {
     
-    this.lifetimeInMinutes = lifetimeInMinutes;
+    this.lifetimeInSeconds = lifetimeInSeconds;
     return this;
   }
 
    /**
-   * Get lifetimeInMinutes
-   * @return lifetimeInMinutes
+   * Get lifetimeInSeconds
+   * @return lifetimeInSeconds
   **/
   @javax.annotation.Nullable
 
-  public Double getLifetimeInMinutes() {
-    return lifetimeInMinutes;
+  public Integer getLifetimeInSeconds() {
+    return lifetimeInSeconds;
   }
 
 
-  public void setLifetimeInMinutes(Double lifetimeInMinutes) {
-    this.lifetimeInMinutes = lifetimeInMinutes;
+  public void setLifetimeInSeconds(Integer lifetimeInSeconds) {
+    this.lifetimeInSeconds = lifetimeInSeconds;
   }
 
 
@@ -170,7 +170,7 @@ public class SessionCreateRequest {
     return Objects.equals(this.identifier, sessionCreateRequest.identifier) &&
         Objects.equals(this.type, sessionCreateRequest.type) &&
         Objects.equals(this.redirectUri, sessionCreateRequest.redirectUri) &&
-        Objects.equals(this.lifetimeInMinutes, sessionCreateRequest.lifetimeInMinutes);
+        Objects.equals(this.lifetimeInSeconds, sessionCreateRequest.lifetimeInSeconds);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -179,7 +179,7 @@ public class SessionCreateRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(identifier, type, redirectUri, lifetimeInMinutes);
+    return Objects.hash(identifier, type, redirectUri, lifetimeInSeconds);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -196,7 +196,7 @@ public class SessionCreateRequest {
     sb.append("    identifier: ").append(toIndentedString(identifier)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    redirectUri: ").append(toIndentedString(redirectUri)).append("\n");
-    sb.append("    lifetimeInMinutes: ").append(toIndentedString(lifetimeInMinutes)).append("\n");
+    sb.append("    lifetimeInSeconds: ").append(toIndentedString(lifetimeInSeconds)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -222,7 +222,7 @@ public class SessionCreateRequest {
     openapiFields.add("identifier");
     openapiFields.add("type");
     openapiFields.add("redirectUri");
-    openapiFields.add("lifetimeInMinutes");
+    openapiFields.add("lifetimeInSeconds");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
