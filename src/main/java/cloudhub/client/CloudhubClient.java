@@ -146,6 +146,10 @@ public class CloudhubClient {
 
     private void initHttpClient(List<Interceptor> interceptors) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(2, TimeUnit.MINUTES) // connect timeout
+        .writeTimeout(2, TimeUnit.MINUTES) // write timeout
+        .readTimeout(2, TimeUnit.MINUTES); // read timeout
+
         builder.addNetworkInterceptor(getProgressInterceptor());
         for (Interceptor interceptor: interceptors) {
             builder.addInterceptor(interceptor);
