@@ -15,6 +15,8 @@ package cloudhub.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import java.util.Base64;
+
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -73,7 +75,7 @@ public class CertificateModel {
   @javax.annotation.Nullable
 
   public byte[] getContent() {
-    return content;
+    return Base64.getEncoder().encode(this.content);
   }
 
 
