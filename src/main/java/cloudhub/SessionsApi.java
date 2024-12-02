@@ -17,9 +17,17 @@ import cloudhub.client.ApiCallback;
 import cloudhub.client.CloudhubClient;
 import cloudhub.client.ApiException;
 import cloudhub.client.ApiResponse;
+import cloudhub.client.Configuration;
 import cloudhub.client.Pair;
+import cloudhub.client.ProgressRequestBody;
+import cloudhub.client.ProgressResponseBody;
+
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+
+
+import cloudhub.client.model.CertificateModel;
 import cloudhub.client.model.SessionCreateRequest;
 import cloudhub.client.model.SessionModel;
 import cloudhub.client.model.SignHashRequest;
@@ -30,6 +38,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.ws.rs.core.GenericType;
 
 public class SessionsApi {
     private CloudhubClient localVarCloudhubClient;
@@ -443,6 +452,133 @@ public class SessionsApi {
 
         okhttp3.Call localVarCall = apiSessionsSignHashPostValidateBeforeCall(signHashRequest, _callback);
         Type localVarReturnType = new TypeToken<byte[]>(){}.getType();
+        localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for apiV2SessionsCertificateGet
+     * @param session  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+        <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call apiV2SessionsCertificateGetCall(String session, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/v2/sessions/certificate";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (session != null) {
+            localVarQueryParams.addAll(localVarCloudhubClient.parameterToPair("session", session));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarCloudhubClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarCloudhubClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "ApiKey" };
+        return localVarCloudhubClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call apiV2SessionsCertificateGetValidateBeforeCall(String session, final ApiCallback _callback) throws ApiException {
+        return apiV2SessionsCertificateGetCall(session, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param session  (optional)
+     * @return CertificateModel
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+        <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+     </table>
+     */
+    public CertificateModel apiV2SessionsCertificateGet(String session) throws ApiException {
+        ApiResponse<CertificateModel> localVarResp = apiV2SessionsCertificateGetWithHttpInfo(session);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param session  (optional)
+     * @return ApiResponse&lt;CertificateModel&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+        <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<CertificateModel> apiV2SessionsCertificateGetWithHttpInfo(String session) throws ApiException {
+        okhttp3.Call localVarCall = apiV2SessionsCertificateGetValidateBeforeCall(session, null);
+        Type localVarReturnType = new TypeToken<CertificateModel>(){}.getType();
+        return localVarCloudhubClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param session  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+        <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call apiV2SessionsCertificateGetAsync(String session, final ApiCallback<CertificateModel> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = apiV2SessionsCertificateGetValidateBeforeCall(session, _callback);
+        Type localVarReturnType = new TypeToken<CertificateModel>(){}.getType();
         localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 | [**apiSessionsCertificateGet**](SessionsApi.md#apiSessionsCertificateGet) | **GET** /api/sessions/certificate |  |
 | [**apiSessionsPost**](SessionsApi.md#apiSessionsPost) | **POST** /api/sessions |  |
 | [**apiSessionsSignHashPost**](SessionsApi.md#apiSessionsSignHashPost) | **POST** /api/sessions/sign-hash |  |
+| [**apiV2SessionsCertificateGet**](SessionsApi.md#apiV2SessionsCertificateGet) | **GET** /api/v2/sessions/certificate |  |
 
 
 <a name="apiSessionsCertificateGet"></a>
@@ -18,7 +19,7 @@ All URIs are relative to *http://localhost*
 ### Example
 ```java
 // Import classes:
-import cloudhub.client.CloudhubClient;
+import cloudhub.client.ApiClient;
 import cloudhub.client.ApiException;
 import cloudhub.client.Configuration;
 import cloudhub.client.auth.*;
@@ -27,7 +28,7 @@ import cloudhub.SessionsApi;
 
 public class Example {
   public static void main(String[] args) {
-    CloudhubClient defaultClient = Configuration.getDefaultCloudhubClient();
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost");
     
     // Configure API key authorization: ApiKey
@@ -85,7 +86,7 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import cloudhub.client.CloudhubClient;
+import cloudhub.client.ApiClient;
 import cloudhub.client.ApiException;
 import cloudhub.client.Configuration;
 import cloudhub.client.auth.*;
@@ -94,7 +95,7 @@ import cloudhub.SessionsApi;
 
 public class Example {
   public static void main(String[] args) {
-    CloudhubClient defaultClient = Configuration.getDefaultCloudhubClient();
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost");
     
     // Configure API key authorization: ApiKey
@@ -152,7 +153,7 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import cloudhub.client.CloudhubClient;
+import cloudhub.client.ApiClient;
 import cloudhub.client.ApiException;
 import cloudhub.client.Configuration;
 import cloudhub.client.auth.*;
@@ -161,7 +162,7 @@ import cloudhub.SessionsApi;
 
 public class Example {
   public static void main(String[] args) {
-    CloudhubClient defaultClient = Configuration.getDefaultCloudhubClient();
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
     defaultClient.setBasePath("http://localhost");
     
     // Configure API key authorization: ApiKey
@@ -203,6 +204,73 @@ public class Example {
 ### HTTP request headers
 
  - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+
+<a name="apiV2SessionsCertificateGet"></a>
+# **apiV2SessionsCertificateGet**
+> CertificateModel apiV2SessionsCertificateGet(session)
+
+
+
+### Example
+```java
+// Import classes:
+import cloudhub.client.ApiClient;
+import cloudhub.client.ApiException;
+import cloudhub.client.Configuration;
+import cloudhub.client.auth.*;
+import cloudhub.client.models.*;
+import cloudhub.SessionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure API key authorization: ApiKey
+    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
+    ApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKey.setApiKeyPrefix("Token");
+
+    SessionsApi apiInstance = new SessionsApi(defaultClient);
+    String session = "session_example"; // String | 
+    try {
+      CertificateModel result = apiInstance.apiV2SessionsCertificateGet(session);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SessionsApi#apiV2SessionsCertificateGet");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **session** | **String**|  | [optional] |
+
+### Return type
+
+[**CertificateModel**](CertificateModel.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
 ### HTTP response details
