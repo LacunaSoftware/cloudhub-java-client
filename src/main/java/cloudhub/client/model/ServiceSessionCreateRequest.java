@@ -15,7 +15,6 @@ package cloudhub.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import cloudhub.client.model.IdentifierTypes;
 import cloudhub.client.model.TrustServiceSessionTypes;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
@@ -47,14 +46,10 @@ import java.util.Set;
 import cloudhub.client.JSON;
 
 /**
- * SessionCreateRequest
+ * ServiceSessionCreateRequest
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T09:46:17.287214-03:00[America/Sao_Paulo]")
-public class SessionCreateRequest {
-  public static final String SERIALIZED_NAME_IDENTIFIER_TYPE = "identifierType";
-  @SerializedName(SERIALIZED_NAME_IDENTIFIER_TYPE)
-  private IdentifierTypes identifierType;
-
+public class ServiceSessionCreateRequest {
   public static final String SERIALIZED_NAME_IDENTIFIER = "identifier";
   @SerializedName(SERIALIZED_NAME_IDENTIFIER)
   private String identifier;
@@ -71,32 +66,10 @@ public class SessionCreateRequest {
   @SerializedName(SERIALIZED_NAME_LIFETIME_IN_SECONDS)
   private Integer lifetimeInSeconds;
 
-  public SessionCreateRequest() {
+  public ServiceSessionCreateRequest() {
   }
 
-  public SessionCreateRequest identifierType(IdentifierTypes identifierType) {
-    
-    this.identifierType = identifierType;
-    return this;
-  }
-
-   /**
-   * Get identifierType
-   * @return identifierType
-  **/
-  @javax.annotation.Nullable
-
-  public IdentifierTypes getIdentifierType() {
-    return identifierType;
-  }
-
-
-  public void setIdentifierType(IdentifierTypes identifierType) {
-    this.identifierType = identifierType;
-  }
-
-
-  public SessionCreateRequest identifier(String identifier) {
+  public ServiceSessionCreateRequest identifier(String identifier) {
     
     this.identifier = identifier;
     return this;
@@ -118,7 +91,7 @@ public class SessionCreateRequest {
   }
 
 
-  public SessionCreateRequest type(TrustServiceSessionTypes type) {
+  public ServiceSessionCreateRequest type(TrustServiceSessionTypes type) {
     
     this.type = type;
     return this;
@@ -140,7 +113,7 @@ public class SessionCreateRequest {
   }
 
 
-  public SessionCreateRequest redirectUri(String redirectUri) {
+  public ServiceSessionCreateRequest redirectUri(String redirectUri) {
     
     this.redirectUri = redirectUri;
     return this;
@@ -162,7 +135,7 @@ public class SessionCreateRequest {
   }
 
 
-  public SessionCreateRequest lifetimeInSeconds(Integer lifetimeInSeconds) {
+  public ServiceSessionCreateRequest lifetimeInSeconds(Integer lifetimeInSeconds) {
     
     this.lifetimeInSeconds = lifetimeInSeconds;
     return this;
@@ -193,12 +166,11 @@ public class SessionCreateRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SessionCreateRequest sessionCreateRequest = (SessionCreateRequest) o;
-    return Objects.equals(this.identifierType, sessionCreateRequest.identifierType) &&
-        Objects.equals(this.identifier, sessionCreateRequest.identifier) &&
-        Objects.equals(this.type, sessionCreateRequest.type) &&
-        Objects.equals(this.redirectUri, sessionCreateRequest.redirectUri) &&
-        Objects.equals(this.lifetimeInSeconds, sessionCreateRequest.lifetimeInSeconds);
+    ServiceSessionCreateRequest serviceSessionCreateRequest = (ServiceSessionCreateRequest) o;
+    return Objects.equals(this.identifier, serviceSessionCreateRequest.identifier) &&
+        Objects.equals(this.type, serviceSessionCreateRequest.type) &&
+        Objects.equals(this.redirectUri, serviceSessionCreateRequest.redirectUri) &&
+        Objects.equals(this.lifetimeInSeconds, serviceSessionCreateRequest.lifetimeInSeconds);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -207,7 +179,7 @@ public class SessionCreateRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(identifierType, identifier, type, redirectUri, lifetimeInSeconds);
+    return Objects.hash(identifier, type, redirectUri, lifetimeInSeconds);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -220,8 +192,7 @@ public class SessionCreateRequest {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SessionCreateRequest {\n");
-    sb.append("    identifierType: ").append(toIndentedString(identifierType)).append("\n");
+    sb.append("class ServiceSessionCreateRequest {\n");
     sb.append("    identifier: ").append(toIndentedString(identifier)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    redirectUri: ").append(toIndentedString(redirectUri)).append("\n");
@@ -248,7 +219,6 @@ public class SessionCreateRequest {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("identifierType");
     openapiFields.add("identifier");
     openapiFields.add("type");
     openapiFields.add("redirectUri");
@@ -264,25 +234,25 @@ public class SessionCreateRequest {
   * Validates the JSON Object and throws an exception if issues found
   *
   * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SessionCreateRequest
+  * @throws IOException if the JSON Object is invalid with respect to ServiceSessionCreateRequest
   */
   public static void validateJsonObject(JsonObject jsonObj) throws IOException {
       if (jsonObj == null) {
-        if (!SessionCreateRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in SessionCreateRequest is not found in the empty JSON string", SessionCreateRequest.openapiRequiredFields.toString()));
+        if (!ServiceSessionCreateRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ServiceSessionCreateRequest is not found in the empty JSON string", ServiceSessionCreateRequest.openapiRequiredFields.toString()));
         }
       }
 
       Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
       // check to see if the JSON string contains additional fields
       for (Entry<String, JsonElement> entry : entries) {
-        if (!SessionCreateRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SessionCreateRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        if (!ServiceSessionCreateRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ServiceSessionCreateRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : SessionCreateRequest.openapiRequiredFields) {
+      for (String requiredField : ServiceSessionCreateRequest.openapiRequiredFields) {
         if (jsonObj.get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
@@ -299,22 +269,22 @@ public class SessionCreateRequest {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!SessionCreateRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'SessionCreateRequest' and its subtypes
+       if (!ServiceSessionCreateRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ServiceSessionCreateRequest' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<SessionCreateRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(SessionCreateRequest.class));
+       final TypeAdapter<ServiceSessionCreateRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ServiceSessionCreateRequest.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<SessionCreateRequest>() {
+       return (TypeAdapter<T>) new TypeAdapter<ServiceSessionCreateRequest>() {
            @Override
-           public void write(JsonWriter out, SessionCreateRequest value) throws IOException {
+           public void write(JsonWriter out, ServiceSessionCreateRequest value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public SessionCreateRequest read(JsonReader in) throws IOException {
+           public ServiceSessionCreateRequest read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
              return thisAdapter.fromJsonTree(jsonObj);
@@ -325,18 +295,18 @@ public class SessionCreateRequest {
   }
 
  /**
-  * Create an instance of SessionCreateRequest given an JSON string
+  * Create an instance of ServiceSessionCreateRequest given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of SessionCreateRequest
-  * @throws IOException if the JSON string is invalid with respect to SessionCreateRequest
+  * @return An instance of ServiceSessionCreateRequest
+  * @throws IOException if the JSON string is invalid with respect to ServiceSessionCreateRequest
   */
-  public static SessionCreateRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, SessionCreateRequest.class);
+  public static ServiceSessionCreateRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ServiceSessionCreateRequest.class);
   }
 
  /**
-  * Convert an instance of SessionCreateRequest to an JSON string
+  * Convert an instance of ServiceSessionCreateRequest to an JSON string
   *
   * @return JSON string
   */

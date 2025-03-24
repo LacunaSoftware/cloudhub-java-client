@@ -94,6 +94,8 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
         gsonBuilder.registerTypeAdapterFactory(new cloudhub.client.model.CertificateModel.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new cloudhub.client.model.ServiceSessionCreateRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new cloudhub.client.model.ServiceSessionCreateResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new cloudhub.client.model.SessionCreateRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new cloudhub.client.model.SessionModel.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new cloudhub.client.model.SignHashRequest.CustomTypeAdapterFactory());

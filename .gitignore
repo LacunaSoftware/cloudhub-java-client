@@ -31,3 +31,5 @@ build.sbt
 src/main/AndroidManifest.xml
 README.md
 .openapi-generator-ignore
+*.gpg
+.vscode/settings.json

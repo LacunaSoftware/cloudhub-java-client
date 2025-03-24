@@ -1,13 +1,12 @@
 
 
-# SessionCreateRequest
+# ServiceSessionCreateRequest
 
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**identifierType** | **IdentifierTypes** |  |  [optional] |
 |**identifier** | **String** |  |  |
 |**type** | **TrustServiceSessionTypes** |  |  [optional] |
 |**redirectUri** | **String** |  |  |
