@@ -6,6 +6,8 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 | [**apiSessionsCertificateGet**](SessionsApi.md#apiSessionsCertificateGet) | **GET** /api/sessions/certificate |  |
 | [**apiSessionsPost**](SessionsApi.md#apiSessionsPost) | **POST** /api/sessions |  |
+| [**apiSessionsServicesGet**](SessionsApi.md#apiSessionsServicesGet) | **GET** /api/sessions/services |  |
+| [**apiSessionsServicesNamePost**](SessionsApi.md#apiSessionsServicesNamePost) | **POST** /api/sessions/services/{name} |  |
 | [**apiSessionsSignHashPost**](SessionsApi.md#apiSessionsSignHashPost) | **POST** /api/sessions/sign-hash |  |
 | [**apiV2SessionsCertificateGet**](SessionsApi.md#apiV2SessionsCertificateGet) | **GET** /api/v2/sessions/certificate |  |
 
@@ -129,6 +131,144 @@ public class Example {
 ### Return type
 
 [**SessionModel**](SessionModel.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+
+<a name="apiSessionsServicesGet"></a>
+# **apiSessionsServicesGet**
+> List&lt;TrustServiceInfoModel&gt; apiSessionsServicesGet(identifier, identifierType)
+
+
+
+### Example
+```java
+// Import classes:
+import cloudhub.client.ApiClient;
+import cloudhub.client.ApiException;
+import cloudhub.client.Configuration;
+import cloudhub.client.auth.*;
+import cloudhub.client.models.*;
+import cloudhub.SessionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure API key authorization: ApiKey
+    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
+    ApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKey.setApiKeyPrefix("Token");
+
+    SessionsApi apiInstance = new SessionsApi(defaultClient);
+    String identifier = "identifier_example"; // String | 
+    IdentifierTypes identifierType = IdentifierTypes.fromValue("CPF"); // IdentifierTypes | 
+    try {
+      List<TrustServiceInfoModel> result = apiInstance.apiSessionsServicesGet(identifier, identifierType);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SessionsApi#apiSessionsServicesGet");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **identifier** | **String**|  | [optional] |
+| **identifierType** | [**IdentifierTypes**](.md)|  | [optional] [enum: CPF, CNPJ] |
+
+### Return type
+
+[**List&lt;TrustServiceInfoModel&gt;**](TrustServiceInfoModel.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+
+<a name="apiSessionsServicesNamePost"></a>
+# **apiSessionsServicesNamePost**
+> ServiceSessionCreateResponse apiSessionsServicesNamePost(name, serviceSessionCreateRequest)
+
+
+
+### Example
+```java
+// Import classes:
+import cloudhub.client.ApiClient;
+import cloudhub.client.ApiException;
+import cloudhub.client.Configuration;
+import cloudhub.client.auth.*;
+import cloudhub.client.models.*;
+import cloudhub.SessionsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost");
+    
+    // Configure API key authorization: ApiKey
+    ApiKeyAuth ApiKey = (ApiKeyAuth) defaultClient.getAuthentication("ApiKey");
+    ApiKey.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //ApiKey.setApiKeyPrefix("Token");
+
+    SessionsApi apiInstance = new SessionsApi(defaultClient);
+    String name = "name_example"; // String | 
+    ServiceSessionCreateRequest serviceSessionCreateRequest = new ServiceSessionCreateRequest(); // ServiceSessionCreateRequest | 
+    try {
+      ServiceSessionCreateResponse result = apiInstance.apiSessionsServicesNamePost(name, serviceSessionCreateRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SessionsApi#apiSessionsServicesNamePost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **name** | **String**|  | |
+| **serviceSessionCreateRequest** | [**ServiceSessionCreateRequest**](ServiceSessionCreateRequest.md)|  | [optional] |
+
+### Return type
+
+[**ServiceSessionCreateResponse**](ServiceSessionCreateResponse.md)
 
 ### Authorization
 

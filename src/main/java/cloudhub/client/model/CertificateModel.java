@@ -15,8 +15,6 @@ package cloudhub.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Base64;
-
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -49,7 +47,7 @@ import cloudhub.client.JSON;
 /**
  * CertificateModel
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-02-16T16:45:14.977060100-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T09:46:17.287214-03:00[America/Sao_Paulo]")
 public class CertificateModel {
   public static final String SERIALIZED_NAME_CONTENT = "content";
   @SerializedName(SERIALIZED_NAME_CONTENT)
@@ -75,7 +73,7 @@ public class CertificateModel {
   @javax.annotation.Nullable
 
   public byte[] getContent() {
-    return Base64.getEncoder().encode(this.content);
+    return content;
   }
 
 
