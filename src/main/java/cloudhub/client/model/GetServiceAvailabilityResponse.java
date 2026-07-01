@@ -14,7 +14,6 @@
 package cloudhub.client.model;
 
 import java.util.Objects;
-import cloudhub.client.model.TrustServiceInfoModel;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -48,58 +47,58 @@ import java.util.Set;
 import cloudhub.client.JSON;
 
 /**
- * ServiceSessionCreateResponse
+ * GetServiceAvailabilityResponse
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
-public class ServiceSessionCreateResponse {
-  public static final String SERIALIZED_NAME_SERVICE_INFO = "serviceInfo";
-  @SerializedName(SERIALIZED_NAME_SERVICE_INFO)
+public class GetServiceAvailabilityResponse {
+  public static final String SERIALIZED_NAME_DISCOVERY_AVAILABLE = "discoveryAvailable";
+  @SerializedName(SERIALIZED_NAME_DISCOVERY_AVAILABLE)
   @javax.annotation.Nullable
-  private TrustServiceInfoModel serviceInfo;
+  private Boolean discoveryAvailable;
 
-  public static final String SERIALIZED_NAME_AUTH_URL = "authUrl";
-  @SerializedName(SERIALIZED_NAME_AUTH_URL)
+  public static final String SERIALIZED_NAME_CERTIFICATE_FOUND = "certificateFound";
+  @SerializedName(SERIALIZED_NAME_CERTIFICATE_FOUND)
   @javax.annotation.Nullable
-  private String authUrl;
+  private Boolean certificateFound;
 
-  public ServiceSessionCreateResponse() {
+  public GetServiceAvailabilityResponse() {
   }
 
-  public ServiceSessionCreateResponse serviceInfo(@javax.annotation.Nullable TrustServiceInfoModel serviceInfo) {
-    this.serviceInfo = serviceInfo;
+  public GetServiceAvailabilityResponse discoveryAvailable(@javax.annotation.Nullable Boolean discoveryAvailable) {
+    this.discoveryAvailable = discoveryAvailable;
     return this;
   }
 
   /**
-   * Get serviceInfo
-   * @return serviceInfo
+   * Get discoveryAvailable
+   * @return discoveryAvailable
    */
   @javax.annotation.Nullable
-  public TrustServiceInfoModel getServiceInfo() {
-    return serviceInfo;
+  public Boolean getDiscoveryAvailable() {
+    return discoveryAvailable;
   }
 
-  public void setServiceInfo(@javax.annotation.Nullable TrustServiceInfoModel serviceInfo) {
-    this.serviceInfo = serviceInfo;
+  public void setDiscoveryAvailable(@javax.annotation.Nullable Boolean discoveryAvailable) {
+    this.discoveryAvailable = discoveryAvailable;
   }
 
 
-  public ServiceSessionCreateResponse authUrl(@javax.annotation.Nullable String authUrl) {
-    this.authUrl = authUrl;
+  public GetServiceAvailabilityResponse certificateFound(@javax.annotation.Nullable Boolean certificateFound) {
+    this.certificateFound = certificateFound;
     return this;
   }
 
   /**
-   * Get authUrl
-   * @return authUrl
+   * Get certificateFound
+   * @return certificateFound
    */
   @javax.annotation.Nullable
-  public String getAuthUrl() {
-    return authUrl;
+  public Boolean getCertificateFound() {
+    return certificateFound;
   }
 
-  public void setAuthUrl(@javax.annotation.Nullable String authUrl) {
-    this.authUrl = authUrl;
+  public void setCertificateFound(@javax.annotation.Nullable Boolean certificateFound) {
+    this.certificateFound = certificateFound;
   }
 
 
@@ -112,9 +111,9 @@ public class ServiceSessionCreateResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ServiceSessionCreateResponse serviceSessionCreateResponse = (ServiceSessionCreateResponse) o;
-    return Objects.equals(this.serviceInfo, serviceSessionCreateResponse.serviceInfo) &&
-        Objects.equals(this.authUrl, serviceSessionCreateResponse.authUrl);
+    GetServiceAvailabilityResponse getServiceAvailabilityResponse = (GetServiceAvailabilityResponse) o;
+    return Objects.equals(this.discoveryAvailable, getServiceAvailabilityResponse.discoveryAvailable) &&
+        Objects.equals(this.certificateFound, getServiceAvailabilityResponse.certificateFound);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -123,7 +122,7 @@ public class ServiceSessionCreateResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(serviceInfo, authUrl);
+    return Objects.hash(discoveryAvailable, certificateFound);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -136,9 +135,9 @@ public class ServiceSessionCreateResponse {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ServiceSessionCreateResponse {\n");
-    sb.append("    serviceInfo: ").append(toIndentedString(serviceInfo)).append("\n");
-    sb.append("    authUrl: ").append(toIndentedString(authUrl)).append("\n");
+    sb.append("class GetServiceAvailabilityResponse {\n");
+    sb.append("    discoveryAvailable: ").append(toIndentedString(discoveryAvailable)).append("\n");
+    sb.append("    certificateFound: ").append(toIndentedString(certificateFound)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -160,7 +159,7 @@ public class ServiceSessionCreateResponse {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("serviceInfo", "authUrl"));
+    openapiFields = new HashSet<String>(Arrays.asList("discoveryAvailable", "certificateFound"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);
@@ -170,52 +169,45 @@ public class ServiceSessionCreateResponse {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to ServiceSessionCreateResponse
+   * @throws IOException if the JSON Element is invalid with respect to GetServiceAvailabilityResponse
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!ServiceSessionCreateResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in ServiceSessionCreateResponse is not found in the empty JSON string", ServiceSessionCreateResponse.openapiRequiredFields.toString()));
+        if (!GetServiceAvailabilityResponse.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GetServiceAvailabilityResponse is not found in the empty JSON string", GetServiceAvailabilityResponse.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!ServiceSessionCreateResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ServiceSessionCreateResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!GetServiceAvailabilityResponse.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetServiceAvailabilityResponse` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `serviceInfo`
-      if (jsonObj.get("serviceInfo") != null && !jsonObj.get("serviceInfo").isJsonNull()) {
-        TrustServiceInfoModel.validateJsonElement(jsonObj.get("serviceInfo"));
-      }
-      if ((jsonObj.get("authUrl") != null && !jsonObj.get("authUrl").isJsonNull()) && !jsonObj.get("authUrl").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `authUrl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("authUrl").toString()));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!ServiceSessionCreateResponse.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'ServiceSessionCreateResponse' and its subtypes
+       if (!GetServiceAvailabilityResponse.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GetServiceAvailabilityResponse' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<ServiceSessionCreateResponse> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(ServiceSessionCreateResponse.class));
+       final TypeAdapter<GetServiceAvailabilityResponse> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GetServiceAvailabilityResponse.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<ServiceSessionCreateResponse>() {
+       return (TypeAdapter<T>) new TypeAdapter<GetServiceAvailabilityResponse>() {
            @Override
-           public void write(JsonWriter out, ServiceSessionCreateResponse value) throws IOException {
+           public void write(JsonWriter out, GetServiceAvailabilityResponse value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public ServiceSessionCreateResponse read(JsonReader in) throws IOException {
+           public GetServiceAvailabilityResponse read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -226,18 +218,18 @@ public class ServiceSessionCreateResponse {
   }
 
   /**
-   * Create an instance of ServiceSessionCreateResponse given an JSON string
+   * Create an instance of GetServiceAvailabilityResponse given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of ServiceSessionCreateResponse
-   * @throws IOException if the JSON string is invalid with respect to ServiceSessionCreateResponse
+   * @return An instance of GetServiceAvailabilityResponse
+   * @throws IOException if the JSON string is invalid with respect to GetServiceAvailabilityResponse
    */
-  public static ServiceSessionCreateResponse fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, ServiceSessionCreateResponse.class);
+  public static GetServiceAvailabilityResponse fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GetServiceAvailabilityResponse.class);
   }
 
   /**
-   * Convert an instance of ServiceSessionCreateResponse to an JSON string
+   * Convert an instance of GetServiceAvailabilityResponse to an JSON string
    *
    * @return JSON string
    */

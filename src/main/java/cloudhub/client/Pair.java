@@ -13,7 +13,7 @@
 
 package cloudhub.client;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T09:46:17.287214-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class Pair {
     private String name = "";
     private String value = "";

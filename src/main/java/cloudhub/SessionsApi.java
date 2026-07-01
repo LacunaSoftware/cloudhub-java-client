@@ -13,21 +13,22 @@
 
 package cloudhub;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import cloudhub.client.ApiCallback;
+import cloudhub.client.ApiClient;
+import cloudhub.client.ApiException;
+import cloudhub.client.ApiResponse;
+import cloudhub.client.Configuration;
+import cloudhub.client.Pair;
+import cloudhub.client.ProgressRequestBody;
+import cloudhub.client.ProgressResponseBody;
 
 import com.google.gson.reflect.TypeToken;
 
-import cloudhub.client.ApiCallback;
-import cloudhub.client.ApiException;
-import cloudhub.client.ApiResponse;
-import cloudhub.client.CloudhubClient;
-import cloudhub.client.Pair;
+import java.io.IOException;
+
+
 import cloudhub.client.model.CertificateModel;
+import cloudhub.client.model.GetServiceAvailabilityResponse;
 import cloudhub.client.model.IdentifierTypes;
 import cloudhub.client.model.ServiceSessionCreateRequest;
 import cloudhub.client.model.ServiceSessionCreateResponse;
@@ -36,22 +37,31 @@ import cloudhub.client.model.SessionModel;
 import cloudhub.client.model.SignHashRequest;
 import cloudhub.client.model.TrustServiceInfoModel;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class SessionsApi {
-    private CloudhubClient localVarCloudhubClient;
+    private ApiClient localVarApiClient;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public SessionsApi(CloudhubClient CloudhubClient) {
-        this.localVarCloudhubClient = CloudhubClient;
-        this.localCustomBaseUrl = this.localVarCloudhubClient.getBasePath();
+    public SessionsApi() {
+        this(Configuration.getDefaultApiClient());
     }
 
-    public CloudhubClient getCloudhubClient() {
-        return localVarCloudhubClient;
+    public SessionsApi(ApiClient apiClient) {
+        this.localVarApiClient = apiClient;
     }
 
-    public void setCloudhubClient(CloudhubClient CloudhubClient) {
-        this.localVarCloudhubClient = CloudhubClient;
+    public ApiClient getApiClient() {
+        return localVarApiClient;
+    }
+
+    public void setApiClient(ApiClient apiClient) {
+        this.localVarApiClient = apiClient;
     }
 
     public int getHostIndex() {
@@ -78,12 +88,12 @@ public class SessionsApi {
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsCertificateGetCall(String session, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call apiSessionsCertificateGetCall(@javax.annotation.Nullable String session, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -109,7 +119,7 @@ public class SessionsApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (session != null) {
-            localVarQueryParams.addAll(localVarCloudhubClient.parameterToPair("session", session));
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("session", session));
         }
 
         final String[] localVarAccepts = {
@@ -117,24 +127,24 @@ public class SessionsApi {
             "application/json",
             "text/json"
         };
-        final String localVarAccept = localVarCloudhubClient.selectHeaderAccept(localVarAccepts);
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
         final String[] localVarContentTypes = {
         };
-        final String localVarContentType = localVarCloudhubClient.selectHeaderContentType(localVarContentTypes);
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarCloudhubClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call apiSessionsCertificateGetValidateBeforeCall(String session, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call apiSessionsCertificateGetValidateBeforeCall(@javax.annotation.Nullable String session, final ApiCallback _callback) throws ApiException {
         return apiSessionsCertificateGetCall(session, _callback);
 
     }
@@ -147,12 +157,12 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public byte[] apiSessionsCertificateGet(String session) throws ApiException {
+    public byte[] apiSessionsCertificateGet(@javax.annotation.Nullable String session) throws ApiException {
         ApiResponse<byte[]> localVarResp = apiSessionsCertificateGetWithHttpInfo(session);
         return localVarResp.getData();
     }
@@ -165,15 +175,15 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<byte[]> apiSessionsCertificateGetWithHttpInfo(String session) throws ApiException {
+    public ApiResponse<byte[]> apiSessionsCertificateGetWithHttpInfo(@javax.annotation.Nullable String session) throws ApiException {
         okhttp3.Call localVarCall = apiSessionsCertificateGetValidateBeforeCall(session, null);
         Type localVarReturnType = new TypeToken<byte[]>(){}.getType();
-        return localVarCloudhubClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -185,16 +195,148 @@ public class SessionsApi {
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsCertificateGetAsync(String session, final ApiCallback<byte[]> _callback) throws ApiException {
+    public okhttp3.Call apiSessionsCertificateGetAsync(@javax.annotation.Nullable String session, final ApiCallback<byte[]> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = apiSessionsCertificateGetValidateBeforeCall(session, _callback);
         Type localVarReturnType = new TypeToken<byte[]>(){}.getType();
-        localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for apiSessionsCustomStateGet
+     * @param session  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call apiSessionsCustomStateGetCall(@javax.annotation.Nonnull String session, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/sessions/custom-state";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (session != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("session", session));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "ApiKey" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call apiSessionsCustomStateGetValidateBeforeCall(@javax.annotation.Nonnull String session, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'session' is set
+        if (session == null) {
+            throw new ApiException("Missing the required parameter 'session' when calling apiSessionsCustomStateGet(Async)");
+        }
+
+        return apiSessionsCustomStateGetCall(session, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param session  (required)
+     * @return String
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public String apiSessionsCustomStateGet(@javax.annotation.Nonnull String session) throws ApiException {
+        ApiResponse<String> localVarResp = apiSessionsCustomStateGetWithHttpInfo(session);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param session  (required)
+     * @return ApiResponse&lt;String&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<String> apiSessionsCustomStateGetWithHttpInfo(@javax.annotation.Nonnull String session) throws ApiException {
+        okhttp3.Call localVarCall = apiSessionsCustomStateGetValidateBeforeCall(session, null);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param session  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call apiSessionsCustomStateGetAsync(@javax.annotation.Nonnull String session, final ApiCallback<String> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = apiSessionsCustomStateGetValidateBeforeCall(session, _callback);
+        Type localVarReturnType = new TypeToken<String>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -205,12 +347,12 @@ public class SessionsApi {
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsPostCall(SessionCreateRequest sessionCreateRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call apiSessionsPostCall(@javax.annotation.Nullable SessionCreateRequest sessionCreateRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -240,7 +382,7 @@ public class SessionsApi {
             "application/json",
             "text/json"
         };
-        final String localVarAccept = localVarCloudhubClient.selectHeaderAccept(localVarAccepts);
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
@@ -251,17 +393,17 @@ public class SessionsApi {
             "text/json",
             "application/*+json"
         };
-        final String localVarContentType = localVarCloudhubClient.selectHeaderContentType(localVarContentTypes);
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarCloudhubClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call apiSessionsPostValidateBeforeCall(SessionCreateRequest sessionCreateRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call apiSessionsPostValidateBeforeCall(@javax.annotation.Nullable SessionCreateRequest sessionCreateRequest, final ApiCallback _callback) throws ApiException {
         return apiSessionsPostCall(sessionCreateRequest, _callback);
 
     }
@@ -274,12 +416,12 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public SessionModel apiSessionsPost(SessionCreateRequest sessionCreateRequest) throws ApiException {
+    public SessionModel apiSessionsPost(@javax.annotation.Nullable SessionCreateRequest sessionCreateRequest) throws ApiException {
         ApiResponse<SessionModel> localVarResp = apiSessionsPostWithHttpInfo(sessionCreateRequest);
         return localVarResp.getData();
     }
@@ -292,15 +434,15 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<SessionModel> apiSessionsPostWithHttpInfo(SessionCreateRequest sessionCreateRequest) throws ApiException {
+    public ApiResponse<SessionModel> apiSessionsPostWithHttpInfo(@javax.annotation.Nullable SessionCreateRequest sessionCreateRequest) throws ApiException {
         okhttp3.Call localVarCall = apiSessionsPostValidateBeforeCall(sessionCreateRequest, null);
         Type localVarReturnType = new TypeToken<SessionModel>(){}.getType();
-        return localVarCloudhubClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -312,16 +454,16 @@ public class SessionsApi {
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsPostAsync(SessionCreateRequest sessionCreateRequest, final ApiCallback<SessionModel> _callback) throws ApiException {
+    public okhttp3.Call apiSessionsPostAsync(@javax.annotation.Nullable SessionCreateRequest sessionCreateRequest, final ApiCallback<SessionModel> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = apiSessionsPostValidateBeforeCall(sessionCreateRequest, _callback);
         Type localVarReturnType = new TypeToken<SessionModel>(){}.getType();
-        localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -333,12 +475,12 @@ public class SessionsApi {
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsServicesGetCall(String identifier, IdentifierTypes identifierType, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call apiSessionsServicesGetCall(@javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -364,11 +506,11 @@ public class SessionsApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (identifier != null) {
-            localVarQueryParams.addAll(localVarCloudhubClient.parameterToPair("identifier", identifier));
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("identifier", identifier));
         }
 
         if (identifierType != null) {
-            localVarQueryParams.addAll(localVarCloudhubClient.parameterToPair("identifierType", identifierType));
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("identifierType", identifierType));
         }
 
         final String[] localVarAccepts = {
@@ -376,24 +518,24 @@ public class SessionsApi {
             "application/json",
             "text/json"
         };
-        final String localVarAccept = localVarCloudhubClient.selectHeaderAccept(localVarAccepts);
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
         final String[] localVarContentTypes = {
         };
-        final String localVarContentType = localVarCloudhubClient.selectHeaderContentType(localVarContentTypes);
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarCloudhubClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call apiSessionsServicesGetValidateBeforeCall(String identifier, IdentifierTypes identifierType, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call apiSessionsServicesGetValidateBeforeCall(@javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType, final ApiCallback _callback) throws ApiException {
         return apiSessionsServicesGetCall(identifier, identifierType, _callback);
 
     }
@@ -407,12 +549,12 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public List<TrustServiceInfoModel> apiSessionsServicesGet(String identifier, IdentifierTypes identifierType) throws ApiException {
+    public List<TrustServiceInfoModel> apiSessionsServicesGet(@javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType) throws ApiException {
         ApiResponse<List<TrustServiceInfoModel>> localVarResp = apiSessionsServicesGetWithHttpInfo(identifier, identifierType);
         return localVarResp.getData();
     }
@@ -426,15 +568,15 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<TrustServiceInfoModel>> apiSessionsServicesGetWithHttpInfo(String identifier, IdentifierTypes identifierType) throws ApiException {
+    public ApiResponse<List<TrustServiceInfoModel>> apiSessionsServicesGetWithHttpInfo(@javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType) throws ApiException {
         okhttp3.Call localVarCall = apiSessionsServicesGetValidateBeforeCall(identifier, identifierType, null);
         Type localVarReturnType = new TypeToken<List<TrustServiceInfoModel>>(){}.getType();
-        return localVarCloudhubClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -447,16 +589,161 @@ public class SessionsApi {
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsServicesGetAsync(String identifier, IdentifierTypes identifierType, final ApiCallback<List<TrustServiceInfoModel>> _callback) throws ApiException {
+    public okhttp3.Call apiSessionsServicesGetAsync(@javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType, final ApiCallback<List<TrustServiceInfoModel>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = apiSessionsServicesGetValidateBeforeCall(identifier, identifierType, _callback);
         Type localVarReturnType = new TypeToken<List<TrustServiceInfoModel>>(){}.getType();
-        localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for apiSessionsServicesNameAvailabilityGet
+     * @param name  (required)
+     * @param identifier  (optional)
+     * @param identifierType  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call apiSessionsServicesNameAvailabilityGetCall(@javax.annotation.Nonnull String name, @javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/sessions/services/{name}/availability"
+            .replace("{" + "name" + "}", localVarApiClient.escapeString(name.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (identifier != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("identifier", identifier));
+        }
+
+        if (identifierType != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("identifierType", identifierType));
+        }
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "ApiKey" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call apiSessionsServicesNameAvailabilityGetValidateBeforeCall(@javax.annotation.Nonnull String name, @javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling apiSessionsServicesNameAvailabilityGet(Async)");
+        }
+
+        return apiSessionsServicesNameAvailabilityGetCall(name, identifier, identifierType, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param name  (required)
+     * @param identifier  (optional)
+     * @param identifierType  (optional)
+     * @return GetServiceAvailabilityResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public GetServiceAvailabilityResponse apiSessionsServicesNameAvailabilityGet(@javax.annotation.Nonnull String name, @javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType) throws ApiException {
+        ApiResponse<GetServiceAvailabilityResponse> localVarResp = apiSessionsServicesNameAvailabilityGetWithHttpInfo(name, identifier, identifierType);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * 
+     * @param name  (required)
+     * @param identifier  (optional)
+     * @param identifierType  (optional)
+     * @return ApiResponse&lt;GetServiceAvailabilityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<GetServiceAvailabilityResponse> apiSessionsServicesNameAvailabilityGetWithHttpInfo(@javax.annotation.Nonnull String name, @javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType) throws ApiException {
+        okhttp3.Call localVarCall = apiSessionsServicesNameAvailabilityGetValidateBeforeCall(name, identifier, identifierType, null);
+        Type localVarReturnType = new TypeToken<GetServiceAvailabilityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param name  (required)
+     * @param identifier  (optional)
+     * @param identifierType  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call apiSessionsServicesNameAvailabilityGetAsync(@javax.annotation.Nonnull String name, @javax.annotation.Nullable String identifier, @javax.annotation.Nullable IdentifierTypes identifierType, final ApiCallback<GetServiceAvailabilityResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = apiSessionsServicesNameAvailabilityGetValidateBeforeCall(name, identifier, identifierType, _callback);
+        Type localVarReturnType = new TypeToken<GetServiceAvailabilityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -468,12 +755,12 @@ public class SessionsApi {
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsServicesNamePostCall(String name, ServiceSessionCreateRequest serviceSessionCreateRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call apiSessionsServicesNamePostCall(@javax.annotation.Nonnull String name, @javax.annotation.Nullable ServiceSessionCreateRequest serviceSessionCreateRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -491,7 +778,7 @@ public class SessionsApi {
 
         // create path and map variables
         String localVarPath = "/api/sessions/services/{name}"
-            .replace("{" + "name" + "}", localVarCloudhubClient.escapeString(name.toString()));
+            .replace("{" + "name" + "}", localVarApiClient.escapeString(name.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -504,7 +791,7 @@ public class SessionsApi {
             "application/json",
             "text/json"
         };
-        final String localVarAccept = localVarCloudhubClient.selectHeaderAccept(localVarAccepts);
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
@@ -515,17 +802,17 @@ public class SessionsApi {
             "text/json",
             "application/*+json"
         };
-        final String localVarContentType = localVarCloudhubClient.selectHeaderContentType(localVarContentTypes);
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarCloudhubClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call apiSessionsServicesNamePostValidateBeforeCall(String name, ServiceSessionCreateRequest serviceSessionCreateRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call apiSessionsServicesNamePostValidateBeforeCall(@javax.annotation.Nonnull String name, @javax.annotation.Nullable ServiceSessionCreateRequest serviceSessionCreateRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'name' is set
         if (name == null) {
             throw new ApiException("Missing the required parameter 'name' when calling apiSessionsServicesNamePost(Async)");
@@ -544,12 +831,12 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ServiceSessionCreateResponse apiSessionsServicesNamePost(String name, ServiceSessionCreateRequest serviceSessionCreateRequest) throws ApiException {
+    public ServiceSessionCreateResponse apiSessionsServicesNamePost(@javax.annotation.Nonnull String name, @javax.annotation.Nullable ServiceSessionCreateRequest serviceSessionCreateRequest) throws ApiException {
         ApiResponse<ServiceSessionCreateResponse> localVarResp = apiSessionsServicesNamePostWithHttpInfo(name, serviceSessionCreateRequest);
         return localVarResp.getData();
     }
@@ -563,15 +850,15 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ServiceSessionCreateResponse> apiSessionsServicesNamePostWithHttpInfo(String name, ServiceSessionCreateRequest serviceSessionCreateRequest) throws ApiException {
+    public ApiResponse<ServiceSessionCreateResponse> apiSessionsServicesNamePostWithHttpInfo(@javax.annotation.Nonnull String name, @javax.annotation.Nullable ServiceSessionCreateRequest serviceSessionCreateRequest) throws ApiException {
         okhttp3.Call localVarCall = apiSessionsServicesNamePostValidateBeforeCall(name, serviceSessionCreateRequest, null);
         Type localVarReturnType = new TypeToken<ServiceSessionCreateResponse>(){}.getType();
-        return localVarCloudhubClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -584,16 +871,16 @@ public class SessionsApi {
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsServicesNamePostAsync(String name, ServiceSessionCreateRequest serviceSessionCreateRequest, final ApiCallback<ServiceSessionCreateResponse> _callback) throws ApiException {
+    public okhttp3.Call apiSessionsServicesNamePostAsync(@javax.annotation.Nonnull String name, @javax.annotation.Nullable ServiceSessionCreateRequest serviceSessionCreateRequest, final ApiCallback<ServiceSessionCreateResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = apiSessionsServicesNamePostValidateBeforeCall(name, serviceSessionCreateRequest, _callback);
         Type localVarReturnType = new TypeToken<ServiceSessionCreateResponse>(){}.getType();
-        localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -604,12 +891,12 @@ public class SessionsApi {
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsSignHashPostCall(SignHashRequest signHashRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call apiSessionsSignHashPostCall(@javax.annotation.Nullable SignHashRequest signHashRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -639,7 +926,7 @@ public class SessionsApi {
             "application/json",
             "text/json"
         };
-        final String localVarAccept = localVarCloudhubClient.selectHeaderAccept(localVarAccepts);
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
@@ -650,17 +937,17 @@ public class SessionsApi {
             "text/json",
             "application/*+json"
         };
-        final String localVarContentType = localVarCloudhubClient.selectHeaderContentType(localVarContentTypes);
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarCloudhubClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call apiSessionsSignHashPostValidateBeforeCall(SignHashRequest signHashRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call apiSessionsSignHashPostValidateBeforeCall(@javax.annotation.Nullable SignHashRequest signHashRequest, final ApiCallback _callback) throws ApiException {
         return apiSessionsSignHashPostCall(signHashRequest, _callback);
 
     }
@@ -673,12 +960,12 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public byte[] apiSessionsSignHashPost(SignHashRequest signHashRequest) throws ApiException {
+    public byte[] apiSessionsSignHashPost(@javax.annotation.Nullable SignHashRequest signHashRequest) throws ApiException {
         ApiResponse<byte[]> localVarResp = apiSessionsSignHashPostWithHttpInfo(signHashRequest);
         return localVarResp.getData();
     }
@@ -691,15 +978,15 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<byte[]> apiSessionsSignHashPostWithHttpInfo(SignHashRequest signHashRequest) throws ApiException {
+    public ApiResponse<byte[]> apiSessionsSignHashPostWithHttpInfo(@javax.annotation.Nullable SignHashRequest signHashRequest) throws ApiException {
         okhttp3.Call localVarCall = apiSessionsSignHashPostValidateBeforeCall(signHashRequest, null);
         Type localVarReturnType = new TypeToken<byte[]>(){}.getType();
-        return localVarCloudhubClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -711,16 +998,16 @@ public class SessionsApi {
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiSessionsSignHashPostAsync(SignHashRequest signHashRequest, final ApiCallback<byte[]> _callback) throws ApiException {
+    public okhttp3.Call apiSessionsSignHashPostAsync(@javax.annotation.Nullable SignHashRequest signHashRequest, final ApiCallback<byte[]> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = apiSessionsSignHashPostValidateBeforeCall(signHashRequest, _callback);
         Type localVarReturnType = new TypeToken<byte[]>(){}.getType();
-        localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -731,12 +1018,12 @@ public class SessionsApi {
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiV2SessionsCertificateGetCall(String session, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call apiV2SessionsCertificateGetCall(@javax.annotation.Nullable String session, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -762,7 +1049,7 @@ public class SessionsApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         if (session != null) {
-            localVarQueryParams.addAll(localVarCloudhubClient.parameterToPair("session", session));
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("session", session));
         }
 
         final String[] localVarAccepts = {
@@ -770,24 +1057,24 @@ public class SessionsApi {
             "application/json",
             "text/json"
         };
-        final String localVarAccept = localVarCloudhubClient.selectHeaderAccept(localVarAccepts);
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
             localVarHeaderParams.put("Accept", localVarAccept);
         }
 
         final String[] localVarContentTypes = {
         };
-        final String localVarContentType = localVarCloudhubClient.selectHeaderContentType(localVarContentTypes);
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
         String[] localVarAuthNames = new String[] { "ApiKey" };
-        return localVarCloudhubClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call apiV2SessionsCertificateGetValidateBeforeCall(String session, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call apiV2SessionsCertificateGetValidateBeforeCall(@javax.annotation.Nullable String session, final ApiCallback _callback) throws ApiException {
         return apiV2SessionsCertificateGetCall(session, _callback);
 
     }
@@ -800,12 +1087,12 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public CertificateModel apiV2SessionsCertificateGet(String session) throws ApiException {
+    public CertificateModel apiV2SessionsCertificateGet(@javax.annotation.Nullable String session) throws ApiException {
         ApiResponse<CertificateModel> localVarResp = apiV2SessionsCertificateGetWithHttpInfo(session);
         return localVarResp.getData();
     }
@@ -818,15 +1105,15 @@ public class SessionsApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<CertificateModel> apiV2SessionsCertificateGetWithHttpInfo(String session) throws ApiException {
+    public ApiResponse<CertificateModel> apiV2SessionsCertificateGetWithHttpInfo(@javax.annotation.Nullable String session) throws ApiException {
         okhttp3.Call localVarCall = apiV2SessionsCertificateGetValidateBeforeCall(session, null);
         Type localVarReturnType = new TypeToken<CertificateModel>(){}.getType();
-        return localVarCloudhubClient.execute(localVarCall, localVarReturnType);
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -838,35 +1125,16 @@ public class SessionsApi {
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table border="1">
-		<caption>Response Details</caption>
+       <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call apiV2SessionsCertificateGetAsync(String session, final ApiCallback<CertificateModel> _callback) throws ApiException {
+    public okhttp3.Call apiV2SessionsCertificateGetAsync(@javax.annotation.Nullable String session, final ApiCallback<CertificateModel> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = apiV2SessionsCertificateGetValidateBeforeCall(session, _callback);
         Type localVarReturnType = new TypeToken<CertificateModel>(){}.getType();
-        localVarCloudhubClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
-    }
-
-    /**
-     * Converts a given byte array certificate into a readable string for signature or validation purposes
-     * @param certificate The certificate obtained from apiCertificateGet
-     * @return a String with the certificate in base 64
-     */
-    public static String convertCertificateToString(byte[] certificate) {
-        return new String(certificate).replace("\"", "");
-    }
-
-    /**
-     * Converts a given byte array toSignHash into a base64 encoded byte array for signature purposes
-     * @param toSignHash the hash used to sign the document
-     * @return base64 encoded byte array
-     */
-    public static byte[] convertToSignHashToByteArray64(byte[] toSignHash){
-        // first we need to convert it to string and then decode as base64
-        return Base64.getDecoder().decode(convertCertificateToString(toSignHash));
     }
 }

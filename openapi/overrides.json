@@ -1,0 +1,8 @@
+{
+  "_comment": "Declarative spec-level overrides applied by the `normalizeOpenApiSpec` Gradle task BEFORE code generation. CloudHub's Swagger defines the ApiKey security SCHEME but, with AddSecurityRequirement commented out, declares no security REQUIREMENT on its operations. Without that, OpenAPI Generator emits operations with empty authNames and the client never sends the X-Api-Key header (every call gets HTTP 401). `globalSecurity` injects the requirement so every operation attaches the key.",
+  "infoVersion": "v1",
+  "globalSecurity": [ { "ApiKey": [] } ],
+  "enumVarnames": {
+    "_example": "If CloudHub ever introduces an INTEGER-valued enum, map its schema name to ordered constant names here, e.g. \"SomeIntEnum\": [\"FIRST\", \"SECOND\"]. String enums self-name and need no entry. Keys starting with '_' are ignored."
+  }
+}

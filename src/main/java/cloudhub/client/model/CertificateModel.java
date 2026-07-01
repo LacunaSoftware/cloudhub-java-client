@@ -14,13 +14,13 @@
 package cloudhub.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -33,13 +33,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import cloudhub.client.JSON;
@@ -47,60 +49,80 @@ import cloudhub.client.JSON;
 /**
  * CertificateModel
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T09:46:17.287214-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class CertificateModel {
   public static final String SERIALIZED_NAME_CONTENT = "content";
   @SerializedName(SERIALIZED_NAME_CONTENT)
+  @javax.annotation.Nullable
   private byte[] content;
 
   public static final String SERIALIZED_NAME_ALIAS = "alias";
   @SerializedName(SERIALIZED_NAME_ALIAS)
+  @javax.annotation.Nullable
   private String alias;
+
+  public static final String SERIALIZED_NAME_SERVICE_NAME = "serviceName";
+  @SerializedName(SERIALIZED_NAME_SERVICE_NAME)
+  @javax.annotation.Nullable
+  private String serviceName;
 
   public CertificateModel() {
   }
 
-  public CertificateModel content(byte[] content) {
-    
+  public CertificateModel content(@javax.annotation.Nullable byte[] content) {
     this.content = content;
     return this;
   }
 
-   /**
+  /**
    * Get content
    * @return content
-  **/
+   */
   @javax.annotation.Nullable
-
   public byte[] getContent() {
     return content;
   }
 
-
-  public void setContent(byte[] content) {
+  public void setContent(@javax.annotation.Nullable byte[] content) {
     this.content = content;
   }
 
 
-  public CertificateModel alias(String alias) {
-    
+  public CertificateModel alias(@javax.annotation.Nullable String alias) {
     this.alias = alias;
     return this;
   }
 
-   /**
+  /**
    * Get alias
    * @return alias
-  **/
+   */
   @javax.annotation.Nullable
-
   public String getAlias() {
     return alias;
   }
 
-
-  public void setAlias(String alias) {
+  public void setAlias(@javax.annotation.Nullable String alias) {
     this.alias = alias;
+  }
+
+
+  public CertificateModel serviceName(@javax.annotation.Nullable String serviceName) {
+    this.serviceName = serviceName;
+    return this;
+  }
+
+  /**
+   * Get serviceName
+   * @return serviceName
+   */
+  @javax.annotation.Nullable
+  public String getServiceName() {
+    return serviceName;
+  }
+
+  public void setServiceName(@javax.annotation.Nullable String serviceName) {
+    this.serviceName = serviceName;
   }
 
 
@@ -115,7 +137,8 @@ public class CertificateModel {
     }
     CertificateModel certificateModel = (CertificateModel) o;
     return Arrays.equals(this.content, certificateModel.content) &&
-        Objects.equals(this.alias, certificateModel.alias);
+        Objects.equals(this.alias, certificateModel.alias) &&
+        Objects.equals(this.serviceName, certificateModel.serviceName);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -124,7 +147,7 @@ public class CertificateModel {
 
   @Override
   public int hashCode() {
-    return Objects.hash(Arrays.hashCode(content), alias);
+    return Objects.hash(Arrays.hashCode(content), alias, serviceName);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -140,6 +163,7 @@ public class CertificateModel {
     sb.append("class CertificateModel {\n");
     sb.append("    content: ").append(toIndentedString(content)).append("\n");
     sb.append("    alias: ").append(toIndentedString(alias)).append("\n");
+    sb.append("    serviceName: ").append(toIndentedString(serviceName)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -161,36 +185,38 @@ public class CertificateModel {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("content");
-    openapiFields.add("alias");
+    openapiFields = new HashSet<String>(Arrays.asList("content", "alias", "serviceName"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields = new HashSet<String>(0);
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to CertificateModel
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!CertificateModel.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to CertificateModel
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!CertificateModel.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in CertificateModel is not found in the empty JSON string", CertificateModel.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!CertificateModel.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CertificateModel` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CertificateModel` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("alias") != null && !jsonObj.get("alias").isJsonNull()) && !jsonObj.get("alias").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `alias` to be a primitive type in the JSON string but got `%s`", jsonObj.get("alias").toString()));
+      }
+      if ((jsonObj.get("serviceName") != null && !jsonObj.get("serviceName").isJsonNull()) && !jsonObj.get("serviceName").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `serviceName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("serviceName").toString()));
       }
   }
 
@@ -214,31 +240,31 @@ public class CertificateModel {
 
            @Override
            public CertificateModel read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of CertificateModel given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of CertificateModel
-  * @throws IOException if the JSON string is invalid with respect to CertificateModel
-  */
+  /**
+   * Create an instance of CertificateModel given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of CertificateModel
+   * @throws IOException if the JSON string is invalid with respect to CertificateModel
+   */
   public static CertificateModel fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, CertificateModel.class);
   }
 
- /**
-  * Convert an instance of CertificateModel to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of CertificateModel to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

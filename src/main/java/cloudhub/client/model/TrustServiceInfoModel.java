@@ -14,13 +14,13 @@
 package cloudhub.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -33,13 +33,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import cloudhub.client.JSON;
@@ -47,111 +49,103 @@ import cloudhub.client.JSON;
 /**
  * TrustServiceInfoModel
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T09:46:17.287214-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class TrustServiceInfoModel {
   public static final String SERIALIZED_NAME_SERVICE_NAME = "serviceName";
   @SerializedName(SERIALIZED_NAME_SERVICE_NAME)
+  @javax.annotation.Nullable
   private String serviceName;
 
   public static final String SERIALIZED_NAME_PROVIDER = "provider";
   @SerializedName(SERIALIZED_NAME_PROVIDER)
+  @javax.annotation.Nullable
   private String provider;
 
   public static final String SERIALIZED_NAME_ENDPOINT = "endpoint";
   @SerializedName(SERIALIZED_NAME_ENDPOINT)
+  @javax.annotation.Nullable
   private String endpoint;
 
   public static final String SERIALIZED_NAME_BADGE_URL = "badgeUrl";
   @SerializedName(SERIALIZED_NAME_BADGE_URL)
+  @javax.annotation.Nullable
   private String badgeUrl;
 
   public TrustServiceInfoModel() {
   }
 
-  public TrustServiceInfoModel serviceName(String serviceName) {
-    
+  public TrustServiceInfoModel serviceName(@javax.annotation.Nullable String serviceName) {
     this.serviceName = serviceName;
     return this;
   }
 
-   /**
+  /**
    * Get serviceName
    * @return serviceName
-  **/
+   */
   @javax.annotation.Nullable
-
   public String getServiceName() {
     return serviceName;
   }
 
-
-  public void setServiceName(String serviceName) {
+  public void setServiceName(@javax.annotation.Nullable String serviceName) {
     this.serviceName = serviceName;
   }
 
 
-  public TrustServiceInfoModel provider(String provider) {
-    
+  public TrustServiceInfoModel provider(@javax.annotation.Nullable String provider) {
     this.provider = provider;
     return this;
   }
 
-   /**
+  /**
    * Get provider
    * @return provider
-  **/
+   */
   @javax.annotation.Nullable
-
   public String getProvider() {
     return provider;
   }
 
-
-  public void setProvider(String provider) {
+  public void setProvider(@javax.annotation.Nullable String provider) {
     this.provider = provider;
   }
 
 
-  public TrustServiceInfoModel endpoint(String endpoint) {
-    
+  public TrustServiceInfoModel endpoint(@javax.annotation.Nullable String endpoint) {
     this.endpoint = endpoint;
     return this;
   }
 
-   /**
+  /**
    * Get endpoint
    * @return endpoint
-  **/
+   */
   @javax.annotation.Nullable
-
   public String getEndpoint() {
     return endpoint;
   }
 
-
-  public void setEndpoint(String endpoint) {
+  public void setEndpoint(@javax.annotation.Nullable String endpoint) {
     this.endpoint = endpoint;
   }
 
 
-  public TrustServiceInfoModel badgeUrl(String badgeUrl) {
-    
+  public TrustServiceInfoModel badgeUrl(@javax.annotation.Nullable String badgeUrl) {
     this.badgeUrl = badgeUrl;
     return this;
   }
 
-   /**
+  /**
    * Get badgeUrl
    * @return badgeUrl
-  **/
+   */
   @javax.annotation.Nullable
-
   public String getBadgeUrl() {
     return badgeUrl;
   }
 
-
-  public void setBadgeUrl(String badgeUrl) {
+  public void setBadgeUrl(@javax.annotation.Nullable String badgeUrl) {
     this.badgeUrl = badgeUrl;
   }
 
@@ -217,36 +211,33 @@ public class TrustServiceInfoModel {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("serviceName");
-    openapiFields.add("provider");
-    openapiFields.add("endpoint");
-    openapiFields.add("badgeUrl");
+    openapiFields = new HashSet<String>(Arrays.asList("serviceName", "provider", "endpoint", "badgeUrl"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields = new HashSet<String>(0);
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to TrustServiceInfoModel
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!TrustServiceInfoModel.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to TrustServiceInfoModel
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!TrustServiceInfoModel.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in TrustServiceInfoModel is not found in the empty JSON string", TrustServiceInfoModel.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!TrustServiceInfoModel.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TrustServiceInfoModel` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TrustServiceInfoModel` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("serviceName") != null && !jsonObj.get("serviceName").isJsonNull()) && !jsonObj.get("serviceName").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `serviceName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("serviceName").toString()));
       }
@@ -281,31 +272,31 @@ public class TrustServiceInfoModel {
 
            @Override
            public TrustServiceInfoModel read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of TrustServiceInfoModel given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of TrustServiceInfoModel
-  * @throws IOException if the JSON string is invalid with respect to TrustServiceInfoModel
-  */
+  /**
+   * Create an instance of TrustServiceInfoModel given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of TrustServiceInfoModel
+   * @throws IOException if the JSON string is invalid with respect to TrustServiceInfoModel
+   */
   public static TrustServiceInfoModel fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, TrustServiceInfoModel.class);
   }
 
- /**
-  * Convert an instance of TrustServiceInfoModel to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of TrustServiceInfoModel to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

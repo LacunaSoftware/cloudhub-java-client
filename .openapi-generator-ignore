@@ -1,0 +1,43 @@
+# OpenAPI Generator ignore file (committed; honored via `ignoreFileOverride` in openapi-generator.gradle).
+#
+# Files matched here are NEVER overwritten by `openApiGenerate`. Everything else under
+# src/main/java/**, src/test/java/**, and docs/** IS regenerated on every run.
+# Pattern syntax is .gitignore-style, rooted at the repository root (the generator outputDir).
+
+############################
+# Hand-written source code #
+############################
+# Convenience entry point: extends the generated ApiClient with a (baseURL, apiKey)
+# constructor and default 2-minute timeouts. See openapi-generator.gradle / README.
+src/main/java/cloudhub/client/CloudhubClient.java
+# Lacuna-specific helpers, moved out of the (regenerated) SessionsApi so they survive.
+src/main/java/cloudhub/CloudhubUtils.java
+
+###########################
+# Build & publish config  #
+###########################
+build.gradle
+settings.gradle
+gradle.properties
+gradlew
+gradlew.bat
+gradle/**
+openapi-generator.gradle
+
+###########################
+# Pipeline inputs/tooling  #
+###########################
+.openapi-generator-ignore
+openapi/**
+templates/**
+scripts/**
+.config/**
+.github/**
+.claude/**
+
+##################
+# Docs & project #
+##################
+README.md
+CHANGELOG.md
+LICENSE

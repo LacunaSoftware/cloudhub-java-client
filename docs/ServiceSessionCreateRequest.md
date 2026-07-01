@@ -7,10 +7,12 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**identifier** | **String** |  |  |
+|**identifier** | **String** |  |  [optional] |
 |**type** | **TrustServiceSessionTypes** |  |  [optional] |
 |**redirectUri** | **String** |  |  |
 |**lifetimeInSeconds** | **Integer** |  |  [optional] |
+|**customState** | **String** |  |  [optional] |
+|**discover** | **Boolean** |  |  [optional] |
 
 
 

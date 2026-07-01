@@ -1,0 +1,119 @@
+/*
+ * CloudHub Java client - code generation configuration.
+ *
+ * Applied from build.gradle. The OpenAPI Generator plugin is placed on the buildscript
+ * classpath in build.gradle; this file only defines the generation tasks and config.
+ *
+ * Usage:
+ *   ./gradlew normalizeOpenApiSpec openApiGenerate   # regenerate from openapi/cloudhub.json
+ *   ./gradlew clean build                            # compile + verify
+ *
+ * Files listed in .openapi-generator-ignore are NEVER overwritten (hand-maintained).
+ */
+
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+def rawSpec        = file("$projectDir/openapi/cloudhub.json")
+def overridesFile  = file("$projectDir/openapi/overrides.json")
+def normalizedSpec = new File(layout.buildDirectory.get().asFile, 'openapi/cloudhub.normalized.json')
+
+/*
+ * Stage 1 - normalize the captured spec.
+ *
+ * The spec captured straight from CloudHub currently needs NO content changes: both enums
+ * are string-typed (they self-name) and binary fields use `format: byte` (handled natively).
+ * This task is the single declarative place to apply spec-level fixes the generator cannot
+ * infer - most importantly `x-enum-varnames` for any INTEGER-valued enum CloudHub may add.
+ * Overrides are declared in openapi/overrides.json.
+ */
+task normalizeOpenApiSpec {
+    description = 'Apply declarative overrides (openapi/overrides.json) to the captured spec.'
+    group = 'openapi'
+    inputs.file rawSpec
+    inputs.file overridesFile
+    outputs.file normalizedSpec
+    doLast {
+        def spec = new JsonSlurper().parse(rawSpec)
+        def ov   = overridesFile.exists() ? new JsonSlurper().parse(overridesFile) : [:]
+
+        if (ov.infoVersion) {
+            spec.info = spec.info ?: [:]
+            spec.info.version = ov.infoVersion
+        }
+
+        // Inject a global security requirement. CloudHub declares the ApiKey scheme but no
+        // requirement, so without this the generator emits empty authNames and never sends the
+        // X-Api-Key header (every call -> HTTP 401).
+        if (ov.globalSecurity) {
+            spec.security = ov.globalSecurity
+            logger.lifecycle("applied global security requirement: ${ov.globalSecurity}")
+        }
+
+        ov.enumVarnames?.each { schemaName, names ->
+            if (schemaName.startsWith('_')) return            // skip example/comment keys
+            def schema = spec.components?.schemas?.get(schemaName)
+            if (schema?.enum) {
+                schema['x-enum-varnames'] = names
+                logger.lifecycle("applied x-enum-varnames to ${schemaName}")
+            } else {
+                logger.warn("overrides.json: enum schema '${schemaName}' not found in spec")
+            }
+        }
+
+        normalizedSpec.parentFile.mkdirs()
+        normalizedSpec.text = JsonOutput.prettyPrint(JsonOutput.toJson(spec))
+        logger.lifecycle("normalized spec -> ${normalizedSpec}")
+    }
+}
+
+/*
+ * Stage 2 - generate the Java client in place.
+ * Package layout and options are pinned to reproduce the existing client exactly.
+ */
+def tplDir = file("$projectDir/templates")
+def hasTemplates = tplDir.exists() &&
+        ((tplDir.listFiles({ File d, String n -> n.endsWith('.mustache') } as FilenameFilter)?.length ?: 0) > 0)
+
+openApiGenerate {
+    generatorName.set('java')
+    library.set('okhttp-gson')
+    inputSpec.set(normalizedSpec.toString())
+    outputDir.set(projectDir.toString())
+    ignoreFileOverride.set(file("$projectDir/.openapi-generator-ignore").toString())
+    if (hasTemplates) {
+        templateDir.set(tplDir.toString())
+    }
+
+    invokerPackage.set('cloudhub.client')
+    apiPackage.set('cloudhub')
+    modelPackage.set('cloudhub.client.model')
+
+    // Artifact coordinates (groupId/id/version) are intentionally omitted: the generated
+    // build.gradle/pom are protected by .openapi-generator-ignore, so the real coordinates
+    // live only in the hand-maintained build.gradle.
+
+    configOptions.set([
+        hideGenerationTimestamp: 'true',   // stable output -> diffs reflect real API changes
+        dateLibrary            : 'java8',
+        enumPropertyNaming     : 'MACRO_CASE',
+        sourceFolder           : 'src/main/java',
+        useJakartaEe           : 'false',  // current code uses javax.* annotations
+        openApiNullable        : 'true'
+    ])
+
+    // Generated tests are @Disabled stubs that the generator will NOT overwrite once they exist,
+    // so they go stale and break compilation on renames/API changes. Skip them; real tests can be
+    // added under src/test and generation will never touch them.
+    generateApiTests.set(false)
+    generateModelTests.set(false)
+    generateApiDocumentation.set(true)
+    generateModelDocumentation.set(true)
+}
+
+tasks.named('openApiGenerate') {
+    dependsOn 'normalizeOpenApiSpec'
+    // We generate in place (outputDir = projectDir). Gradle would otherwise try to snapshot the
+    // entire repository as task output and fail to hash unreadable files (e.g. under .git).
+    doNotTrackState('Generates in place into the project tree; whole-repo output snapshotting is unnecessary.')
+}

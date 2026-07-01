@@ -1,0 +1,525 @@
+openapi: 3.0.4
+info:
+  title: Cloudhub API
+  version: v1
+servers:
+- url: /
+security:
+- ApiKey: []
+tags:
+- name: Sessions
+paths:
+  /api/sessions/services:
+    get:
+      x-accepts:
+      - application/json
+      - text/json
+      - text/plain
+      parameters:
+      - explode: true
+        in: query
+        name: identifier
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: identifierType
+        required: false
+        schema:
+          $ref: "#/components/schemas/IdentifierTypes"
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TrustServiceInfoModel"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TrustServiceInfoModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TrustServiceInfoModel"
+                type: array
+          description: OK
+      tags:
+      - Sessions
+  /api/sessions/services/{name}/availability:
+    get:
+      x-accepts:
+      - application/json
+      - text/json
+      - text/plain
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: identifier
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: identifierType
+        required: false
+        schema:
+          $ref: "#/components/schemas/IdentifierTypes"
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GetServiceAvailabilityResponse"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetServiceAvailabilityResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/GetServiceAvailabilityResponse"
+          description: OK
+      tags:
+      - Sessions
+  /api/sessions:
+    post:
+      x-content-type: application/json-patch+json
+      x-accepts:
+      - application/json
+      - text/json
+      - text/plain
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/SessionCreateRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SessionCreateRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SessionCreateRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/SessionCreateRequest"
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/SessionModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SessionModel"
+          description: OK
+      tags:
+      - Sessions
+  /api/sessions/services/{name}:
+    post:
+      x-content-type: application/json-patch+json
+      x-accepts:
+      - application/json
+      - text/json
+      - text/plain
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ServiceSessionCreateRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceSessionCreateRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ServiceSessionCreateRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ServiceSessionCreateRequest"
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ServiceSessionCreateResponse"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceSessionCreateResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ServiceSessionCreateResponse"
+          description: OK
+      tags:
+      - Sessions
+  /api/sessions/certificate:
+    get:
+      x-accepts:
+      - application/json
+      - text/json
+      - text/plain
+      parameters:
+      - explode: true
+        in: query
+        name: session
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                format: byte
+                type: string
+            application/json:
+              schema:
+                format: byte
+                type: string
+            text/json:
+              schema:
+                format: byte
+                type: string
+          description: OK
+      tags:
+      - Sessions
+  /api/v2/sessions/certificate:
+    get:
+      x-accepts:
+      - application/json
+      - text/json
+      - text/plain
+      parameters:
+      - explode: true
+        in: query
+        name: session
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CertificateModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CertificateModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CertificateModel"
+          description: OK
+      tags:
+      - Sessions
+  /api/sessions/sign-hash:
+    post:
+      x-content-type: application/json-patch+json
+      x-accepts:
+      - application/json
+      - text/json
+      - text/plain
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/SignHashRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignHashRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SignHashRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/SignHashRequest"
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                format: byte
+                type: string
+            application/json:
+              schema:
+                format: byte
+                type: string
+            text/json:
+              schema:
+                format: byte
+                type: string
+          description: OK
+      tags:
+      - Sessions
+  /api/sessions/custom-state:
+    get:
+      x-accepts:
+      - application/json
+      - text/json
+      - text/plain
+      parameters:
+      - explode: true
+        in: query
+        name: session
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+          description: OK
+      tags:
+      - Sessions
+components:
+  schemas:
+    CertificateModel:
+      additionalProperties: false
+      example:
+        alias: alias
+        serviceName: serviceName
+        content: content
+      properties:
+        content:
+          format: byte
+          nullable: true
+          type: string
+        alias:
+          nullable: true
+          type: string
+        serviceName:
+          nullable: true
+          type: string
+      type: object
+    GetServiceAvailabilityResponse:
+      additionalProperties: false
+      example:
+        certificateFound: true
+        discoveryAvailable: true
+      properties:
+        discoveryAvailable:
+          type: boolean
+        certificateFound:
+          nullable: true
+          type: boolean
+      type: object
+    IdentifierTypes:
+      enum:
+      - CPF
+      - CNPJ
+      type: string
+    ServiceSessionCreateRequest:
+      additionalProperties: false
+      example:
+        redirectUri: redirectUri
+        identifier: identifier
+        discover: true
+        customState: customState
+        lifetimeInSeconds: 0
+        type: SingleSignature
+      properties:
+        identifier:
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/TrustServiceSessionTypes"
+        redirectUri:
+          minLength: 1
+          type: string
+        lifetimeInSeconds:
+          format: int32
+          nullable: true
+          type: integer
+        customState:
+          nullable: true
+          type: string
+        discover:
+          nullable: true
+          type: boolean
+      required:
+      - redirectUri
+      type: object
+    ServiceSessionCreateResponse:
+      additionalProperties: false
+      example:
+        authUrl: authUrl
+        serviceInfo:
+          endpoint: endpoint
+          badgeUrl: badgeUrl
+          provider: provider
+          serviceName: serviceName
+      properties:
+        serviceInfo:
+          $ref: "#/components/schemas/TrustServiceInfoModel"
+        authUrl:
+          nullable: true
+          type: string
+      type: object
+    SessionCreateRequest:
+      additionalProperties: false
+      example:
+        redirectUri: redirectUri
+        identifier: identifier
+        discover: true
+        customState: customState
+        identifierType: CPF
+        lifetimeInSeconds: 0
+        type: SingleSignature
+      properties:
+        identifierType:
+          $ref: "#/components/schemas/IdentifierTypes"
+        identifier:
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/TrustServiceSessionTypes"
+        redirectUri:
+          minLength: 1
+          type: string
+        lifetimeInSeconds:
+          format: int32
+          nullable: true
+          type: integer
+        customState:
+          nullable: true
+          type: string
+        discover:
+          nullable: true
+          type: boolean
+      required:
+      - redirectUri
+      type: object
+    SessionModel:
+      additionalProperties: false
+      example:
+        services:
+        - authUrl: authUrl
+          serviceInfo:
+            endpoint: endpoint
+            badgeUrl: badgeUrl
+            provider: provider
+            serviceName: serviceName
+        - authUrl: authUrl
+          serviceInfo:
+            endpoint: endpoint
+            badgeUrl: badgeUrl
+            provider: provider
+            serviceName: serviceName
+      properties:
+        services:
+          items:
+            $ref: "#/components/schemas/TrustServiceAuthParametersModel"
+          nullable: true
+          type: array
+      type: object
+    SignHashRequest:
+      additionalProperties: false
+      example:
+        digestAlgorithmOid: digestAlgorithmOid
+        session: session
+        digestAlgorithm: digestAlgorithm
+        certificateAlias: certificateAlias
+        hash: hash
+      properties:
+        session:
+          minLength: 1
+          type: string
+        hash:
+          format: byte
+          type: string
+        digestAlgorithm:
+          nullable: true
+          type: string
+        digestAlgorithmOid:
+          nullable: true
+          type: string
+        certificateAlias:
+          nullable: true
+          type: string
+      required:
+      - hash
+      - session
+      type: object
+    TrustServiceAuthParametersModel:
+      additionalProperties: false
+      example:
+        authUrl: authUrl
+        serviceInfo:
+          endpoint: endpoint
+          badgeUrl: badgeUrl
+          provider: provider
+          serviceName: serviceName
+      properties:
+        serviceInfo:
+          $ref: "#/components/schemas/TrustServiceInfoModel"
+        authUrl:
+          nullable: true
+          type: string
+      type: object
+    TrustServiceInfoModel:
+      additionalProperties: false
+      example:
+        endpoint: endpoint
+        badgeUrl: badgeUrl
+        provider: provider
+        serviceName: serviceName
+      properties:
+        serviceName:
+          nullable: true
+          type: string
+        provider:
+          nullable: true
+          type: string
+        endpoint:
+          nullable: true
+          type: string
+        badgeUrl:
+          nullable: true
+          type: string
+      type: object
+    TrustServiceSessionTypes:
+      enum:
+      - SingleSignature
+      - MultiSignature
+      - SignatureSession
+      - AuthenticationSession
+      type: string
+  securitySchemes:
+    ApiKey:
+      description: Api Key authentication
+      in: header
+      name: X-Api-Key
+      type: apiKey
+

@@ -5,7 +5,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 group = 'com.lacunasoftware.cloudhub'
-version = '1.0.5'
+version = '2.0.1'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -23,8 +23,13 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.+'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.diffplug.spotless:spotless-plugin-gradle:6.11.0'
+        classpath 'org.openapitools:openapi-generator-gradle-plugin:7.14.0'
     }
 }
+
+// Code generation (OpenAPI Generator). Task + config live in openapi-generator.gradle.
+apply plugin: 'org.openapi.generator'
+apply from: "$projectDir/openapi-generator.gradle"
 
 
 repositories {
@@ -74,8 +79,11 @@ publishing {
         maven {
             url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             credentials {
-                username ossrhUsername
-                password ossrhPassword
+                // Resolve null-safely so configuration (and regeneration/build) works without
+                // credentials present. Supply -PossrhUsername/-PossrhPassword (or gradle.properties)
+                // when actually publishing.
+                username = project.findProperty('ossrhUsername') ?: ''
+                password = project.findProperty('ossrhPassword') ?: ''
             }
         }
     }
@@ -128,6 +136,10 @@ test {
 
 
 signing {
+    // Require signing only when publishing to the REMOTE Maven repository (Sonatype). This lets
+    // `build` and `publishToMavenLocal` run without a configured GPG key (CI / local testing),
+    // while real releases (`publish`) still sign as before.
+    required { gradle.taskGraph.allTasks.any { it.name.endsWith('PublicationToMavenRepository') } }
     sign publishing.publications.mavenJava
     sign configurations.archives
 }
