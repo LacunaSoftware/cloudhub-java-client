@@ -3,16 +3,14 @@
 All notable changes to the Cloudhub Java client are documented here.
 This project adheres to [Semantic Versioning](https://semver.org).
 
-## [2.0.1] - 2026-06-30
+## [2.0.0] - 2026-06-30
 
 ### Fixed
-- **Client now sends the `X-Api-Key` header.** CloudHub's spec declares the `ApiKey` security
-  *scheme* but no *requirement* (its `AddSecurityRequirement` is commented out), so the generated
-  operations had empty `authNames` and every authenticated call failed with **HTTP 401**. The
-  `normalizeOpenApiSpec` step now injects a global security requirement
-  (`openapi/overrides.json` → `globalSecurity: [{ ApiKey: [] }]`), so all operations attach the key.
-
-## [2.0.0] - 2026-06-26
+- **Client sends the `X-Api-Key` header.** CloudHub's spec declares the `ApiKey` security *scheme*
+  but no *requirement* (its `AddSecurityRequirement` is commented out), so the generated operations
+  had empty `authNames` and every authenticated call failed with **HTTP 401**. The
+  `normalizeOpenApiSpec` step injects a global security requirement
+  (`openapi/overrides.json` → `globalSecurity: [{ ApiKey: [] }]`) so all operations attach the key.
 
 ### Added — automated CloudHub sync pipeline
 - `openapi/cloudhub.json` — OpenAPI spec captured from CloudHub, committed as the source of truth.
