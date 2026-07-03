@@ -3,19 +3,33 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package files
 *.jar
 *.war
 *.ear
-
-# exclude jar for gradle wrapper
 !gradle/wrapper/*.jar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# JVM crash logs
 hs_err_pid*
 
-# build files
+# Build output
 **/target
 target
 .gradle
 build
+
+# Local / machine-specific / secrets
+gradle.properties
+
+# OpenAPI Generator byproducts we don't use (also suppressed in .openapi-generator-ignore
+# so they are never generated; ignored here as a safety net).
+.openapi-generator/
+pom.xml
+build.sbt
+.travis.yml
+git_push.sh
+api/openapi.yaml
+src/main/AndroidManifest.xml
+.github/workflows/maven.yml
+*.gpg
+.vscode/settings.json

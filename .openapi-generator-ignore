@@ -41,3 +41,16 @@ scripts/**
 README.md
 CHANGELOG.md
 LICENSE
+
+##########################################
+# Generator byproducts we don't use      #
+# (this is a Gradle project - not Maven/  #
+#  SBT/Travis/Android; spec lives in       #
+#  openapi/cloudhub.json)                  #
+##########################################
+pom.xml
+build.sbt
+.travis.yml
+git_push.sh
+api/**
+src/main/AndroidManifest.xml
