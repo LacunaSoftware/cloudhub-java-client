@@ -54,3 +54,6 @@ build.sbt
 git_push.sh
 api/**
 src/main/AndroidManifest.xml
+
+# Never overwrite the hand-maintained VCS ignore file (the generator emits its own .gitignore)
+.gitignore

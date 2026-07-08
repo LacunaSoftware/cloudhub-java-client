@@ -1,7 +1,7 @@
 # cloudhub-java-client
 
 Cloudhub API client library for Java
-- API version: 2.0.1
+- API version: 2.0.0
 
 *Generated from the CloudHub OpenAPI spec by the [OpenAPI Generator](https://openapi-generator.tech). Hand-written customizations are kept in separate, protected files — see "Keeping this client up to date".*
 
@@ -86,7 +86,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/cloudhub-client-2.0.1.jar`
+* `target/cloudhub-client-2.0.0.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
