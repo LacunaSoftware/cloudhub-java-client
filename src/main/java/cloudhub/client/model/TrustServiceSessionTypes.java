@@ -14,11 +14,11 @@
 package cloudhub.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
 import com.google.gson.TypeAdapter;
+import com.google.gson.JsonElement;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -29,21 +29,21 @@ import com.google.gson.stream.JsonWriter;
 @JsonAdapter(TrustServiceSessionTypes.Adapter.class)
 public enum TrustServiceSessionTypes {
   
-  SINGLE_SIGNATURE(1),
+  SINGLE_SIGNATURE("SingleSignature"),
   
-  MULTI_SIGNATURE(2),
+  MULTI_SIGNATURE("MultiSignature"),
   
-  SIGNATURE_SESSION(3),
+  SIGNATURE_SESSION("SignatureSession"),
   
-  AUTHENTICATION_SESSION(4);
+  AUTHENTICATION_SESSION("AuthenticationSession");
 
-  private Integer value;
+  private String value;
 
-  TrustServiceSessionTypes(Integer value) {
+  TrustServiceSessionTypes(String value) {
     this.value = value;
   }
 
-  public Integer getValue() {
+  public String getValue() {
     return value;
   }
 
@@ -52,7 +52,7 @@ public enum TrustServiceSessionTypes {
     return String.valueOf(value);
   }
 
-  public static TrustServiceSessionTypes fromValue(Integer value) {
+  public static TrustServiceSessionTypes fromValue(String value) {
     for (TrustServiceSessionTypes b : TrustServiceSessionTypes.values()) {
       if (b.value.equals(value)) {
         return b;
@@ -69,9 +69,14 @@ public enum TrustServiceSessionTypes {
 
     @Override
     public TrustServiceSessionTypes read(final JsonReader jsonReader) throws IOException {
-      Integer value = jsonReader.nextInt();
+      String value = jsonReader.nextString();
       return TrustServiceSessionTypes.fromValue(value);
     }
+  }
+
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+    String value = jsonElement.getAsString();
+    TrustServiceSessionTypes.fromValue(value);
   }
 }
 

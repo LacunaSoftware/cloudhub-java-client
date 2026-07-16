@@ -1,0 +1,13 @@
+# Normalize line endings so code generation produces content-only diffs whether it runs
+# locally on Windows or in Linux CI. Generated sources use LF; without this, CI (LF) vs a
+# Windows-committed baseline (CRLF) shows every line as changed in the PR.
+* text=auto eol=lf
+
+# Windows batch scripts keep CRLF
+*.bat text eol=crlf
+
+# Binary assets (never touch line endings)
+*.jar binary
+*.gpg binary
+*.p12 binary
+*.pfx binary

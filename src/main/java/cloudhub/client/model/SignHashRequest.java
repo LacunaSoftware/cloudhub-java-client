@@ -14,13 +14,13 @@
 package cloudhub.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -33,13 +33,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import cloudhub.client.JSON;
@@ -47,137 +49,127 @@ import cloudhub.client.JSON;
 /**
  * SignHashRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-03-24T09:46:17.287214-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class SignHashRequest {
   public static final String SERIALIZED_NAME_SESSION = "session";
   @SerializedName(SERIALIZED_NAME_SESSION)
+  @javax.annotation.Nonnull
   private String session;
 
   public static final String SERIALIZED_NAME_HASH = "hash";
   @SerializedName(SERIALIZED_NAME_HASH)
+  @javax.annotation.Nonnull
   private byte[] hash;
 
   public static final String SERIALIZED_NAME_DIGEST_ALGORITHM = "digestAlgorithm";
   @SerializedName(SERIALIZED_NAME_DIGEST_ALGORITHM)
+  @javax.annotation.Nullable
   private String digestAlgorithm;
 
   public static final String SERIALIZED_NAME_DIGEST_ALGORITHM_OID = "digestAlgorithmOid";
   @SerializedName(SERIALIZED_NAME_DIGEST_ALGORITHM_OID)
+  @javax.annotation.Nullable
   private String digestAlgorithmOid;
 
   public static final String SERIALIZED_NAME_CERTIFICATE_ALIAS = "certificateAlias";
   @SerializedName(SERIALIZED_NAME_CERTIFICATE_ALIAS)
+  @javax.annotation.Nullable
   private String certificateAlias;
 
   public SignHashRequest() {
   }
 
-  public SignHashRequest session(String session) {
-    
+  public SignHashRequest session(@javax.annotation.Nonnull String session) {
     this.session = session;
     return this;
   }
 
-   /**
+  /**
    * Get session
    * @return session
-  **/
+   */
   @javax.annotation.Nonnull
-
   public String getSession() {
     return session;
   }
 
-
-  public void setSession(String session) {
+  public void setSession(@javax.annotation.Nonnull String session) {
     this.session = session;
   }
 
 
-  public SignHashRequest hash(byte[] hash) {
-    
+  public SignHashRequest hash(@javax.annotation.Nonnull byte[] hash) {
     this.hash = hash;
     return this;
   }
 
-   /**
+  /**
    * Get hash
    * @return hash
-  **/
+   */
   @javax.annotation.Nonnull
-
   public byte[] getHash() {
     return hash;
   }
 
-
-  public void setHash(byte[] hash) {
+  public void setHash(@javax.annotation.Nonnull byte[] hash) {
     this.hash = hash;
   }
 
 
-  public SignHashRequest digestAlgorithm(String digestAlgorithm) {
-    
+  public SignHashRequest digestAlgorithm(@javax.annotation.Nullable String digestAlgorithm) {
     this.digestAlgorithm = digestAlgorithm;
     return this;
   }
 
-   /**
+  /**
    * Get digestAlgorithm
    * @return digestAlgorithm
-  **/
+   */
   @javax.annotation.Nullable
-
   public String getDigestAlgorithm() {
     return digestAlgorithm;
   }
 
-
-  public void setDigestAlgorithm(String digestAlgorithm) {
+  public void setDigestAlgorithm(@javax.annotation.Nullable String digestAlgorithm) {
     this.digestAlgorithm = digestAlgorithm;
   }
 
 
-  public SignHashRequest digestAlgorithmOid(String digestAlgorithmOid) {
-    
+  public SignHashRequest digestAlgorithmOid(@javax.annotation.Nullable String digestAlgorithmOid) {
     this.digestAlgorithmOid = digestAlgorithmOid;
     return this;
   }
 
-   /**
+  /**
    * Get digestAlgorithmOid
    * @return digestAlgorithmOid
-  **/
+   */
   @javax.annotation.Nullable
-
   public String getDigestAlgorithmOid() {
     return digestAlgorithmOid;
   }
 
-
-  public void setDigestAlgorithmOid(String digestAlgorithmOid) {
+  public void setDigestAlgorithmOid(@javax.annotation.Nullable String digestAlgorithmOid) {
     this.digestAlgorithmOid = digestAlgorithmOid;
   }
 
 
-  public SignHashRequest certificateAlias(String certificateAlias) {
-    
+  public SignHashRequest certificateAlias(@javax.annotation.Nullable String certificateAlias) {
     this.certificateAlias = certificateAlias;
     return this;
   }
 
-   /**
+  /**
    * Get certificateAlias
    * @return certificateAlias
-  **/
+   */
   @javax.annotation.Nullable
-
   public String getCertificateAlias() {
     return certificateAlias;
   }
 
-
-  public void setCertificateAlias(String certificateAlias) {
+  public void setCertificateAlias(@javax.annotation.Nullable String certificateAlias) {
     this.certificateAlias = certificateAlias;
   }
 
@@ -245,46 +237,40 @@ public class SignHashRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("session");
-    openapiFields.add("hash");
-    openapiFields.add("digestAlgorithm");
-    openapiFields.add("digestAlgorithmOid");
-    openapiFields.add("certificateAlias");
+    openapiFields = new HashSet<String>(Arrays.asList("session", "hash", "digestAlgorithm", "digestAlgorithmOid", "certificateAlias"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("session");
-    openapiRequiredFields.add("hash");
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("session", "hash"));
   }
 
- /**
-  * Validates the JSON Object and throws an exception if issues found
-  *
-  * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to SignHashRequest
-  */
-  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
-      if (jsonObj == null) {
-        if (!SignHashRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to SignHashRequest
+   */
+  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      if (jsonElement == null) {
+        if (!SignHashRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in SignHashRequest is not found in the empty JSON string", SignHashRequest.openapiRequiredFields.toString()));
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
+      for (Map.Entry<String, JsonElement> entry : entries) {
         if (!SignHashRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SignHashRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SignHashRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : SignHashRequest.openapiRequiredFields) {
-        if (jsonObj.get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
       if (!jsonObj.get("session").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `session` to be a primitive type in the JSON string but got `%s`", jsonObj.get("session").toString()));
       }
@@ -319,31 +305,31 @@ public class SignHashRequest {
 
            @Override
            public SignHashRequest read(JsonReader in) throws IOException {
-             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
-             validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             JsonElement jsonElement = elementAdapter.read(in);
+             validateJsonElement(jsonElement);
+             return thisAdapter.fromJsonTree(jsonElement);
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of SignHashRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of SignHashRequest
-  * @throws IOException if the JSON string is invalid with respect to SignHashRequest
-  */
+  /**
+   * Create an instance of SignHashRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of SignHashRequest
+   * @throws IOException if the JSON string is invalid with respect to SignHashRequest
+   */
   public static SignHashRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, SignHashRequest.class);
   }
 
- /**
-  * Convert an instance of SignHashRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of SignHashRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

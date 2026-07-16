@@ -5,13 +5,13 @@
 ## Enum
 
 
-* `SINGLESIGNATURE` (value: `"SingleSignature"`)
+* `SINGLE_SIGNATURE` (value: `"SingleSignature"`)
 
-* `MULTISIGNATURE` (value: `"MultiSignature"`)
+* `MULTI_SIGNATURE` (value: `"MultiSignature"`)
 
-* `SIGNATURESESSION` (value: `"SignatureSession"`)
+* `SIGNATURE_SESSION` (value: `"SignatureSession"`)
 
-* `AUTHENTICATIONSESSION` (value: `"AuthenticationSession"`)
+* `AUTHENTICATION_SESSION` (value: `"AuthenticationSession"`)
 
 
 

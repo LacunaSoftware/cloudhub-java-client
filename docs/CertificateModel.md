@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**content** | **byte[]** |  |  [optional] |
 |**alias** | **String** |  |  [optional] |
+|**serviceName** | **String** |  |  [optional] |
 
 
 
